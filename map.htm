@@ -1,0 +1,141 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+<script type="text/javascript" src="scripts/src/jquery.imagemapster.js"></script>
+<script type="text/javascript" src="scripts/src/tooltip.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+function state_change(data) {
+//alert(data.state+":"+data.selected);
+}
+$('b').bind('mouseover', function() {
+$('img').mapster('tooltip',this,"The text is: " + $(this).text());
+
+});
+
+$('img').mapster({
+showToolTip: true,
+scaleMap: false,
+noHrefIsMask: false,
+//onStateChange: state_change,
+fillColor: '0a7a0a',
+fillOpacity: 0.7,
+mapKey: "group",
+strokeWidth: 2,
+stroke:true,
+strokeColor: 'F88017',
+isSelectable: true,
+clickNavigate: true,
+areas: [
+{
+key: 'copper',
+//includeKeys: 'rectangle',
+stroke:false,
+toolTip: 'Copper Mountain'
+
+},
+{
+key: 'baja',
+stroke: true,
+strokeWidth: 1,
+scaleMap: true,
+toolTip: 'Baja California'
+},
+{
+key: 'outer-circle',
+includeKeys: 'inner-circle-mask,outer-circle-mask',
+stroke: true,
+toolTip: 'outer circle (a real circle)'
+},
+{
+key: 'outer-circle-mask',
+isMask: true,
+fillColorMask: 'ff002a'
+},
+{
+key: 'inner-circle-mask',
+fillColorMask: 'ffffff',
+isMask: true
+},
+{
+key: 'inner-circle',
+toolTip: 'inner circle'
+}
+]
+});
+
+});
+</script>
+
+
+
+<style type="text/css">
+#d_map {
+width: 900px;
+height: 610px;
+border: 1px solid #000;
+background-color: #ccc;
+margin-bottom: 20px;	
+}
+
+#legend {
+border: solid 1px #000;
+width: 300px;
+position: relative;
+float: right;
+margin-right: 20px;
+margin-top: -580px;
+background-color: #fff;
+padding-bottom: 20px;
+}
+
+#legend ul {
+color: #E6D96C;
+border: 0;
+padding: 0;
+margin: 0px 0px 0px 40px;
+}
+
+#legend h2 {
+margin-top: 20px;
+margin-left: 20px;
+font-family: 'georgia';
+font-size: 1.3em;
+color: #745606;
+}
+
+#legend ul li a {
+font-family: 'tahoma';
+font-size: .8em;
+color: #745606;
+text-decoration: none;
+font-weight: 600;
+border: 0;
+padding: 0;
+margin: 0;
+}
+
+#legend ul li {
+line-height: 16pt;
+border: 0;
+padding: 0;
+margin: 0;
+}
+</style>
+<div style="width: 300px;">
+
+<img class="map" name="map" src="images/map300.jpg" width="280" height="203" border="0" id="map" usemap="#mymap" alt="" />
+
+
+<map name="mymap">
+<area data-key="CO" href="#" coords="0,0,0,0" />
+<area data-key="AL" href="#" coords="0,0,0,0" />
+<area data-key="AR" href="#" coords="0,0,0,0" />
+<area data-key="AK" href="#" coords="0,0,0,0" />
+<area data-key="AZ" href="#" coords="0,0,0,0"/>
+<area shape="poly" coords="37,7,75,25,111,19,129,39,141,54,151,42,165,47,185,83,185,113,198,154,215,170,239,175,262,166,268,174,238,182,226,184,197,169,189,152,159,137,142,137,127,161,124,149,125,133,111,108,100,103,94,105,54,48,47,25,35,16,36,7" href="http://www.emma.com" group="copper" alt="copper" />
+<area shape="poly" group="baja" coords="2,3,12,35,24,53,14,57,24,69,36,80,38,81,60,116,67,112,60,100,21,29,19,17,22,3" href="http://www.emma.com/" alt="baja" />
+</map>
+
+</div>

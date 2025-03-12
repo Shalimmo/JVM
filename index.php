@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-			
+            
 <?php if (have_posts()) : while (have_posts()) : the_post();
 
 $default_header = get_field("default_header", 'option');
@@ -42,10 +42,10 @@ $thumb_medium_url = $default_header['sizes']['jmvillas-full'];
                 </div> <!-- end article section -->
 
                 <div class="page--search">
-	
-					    <p><?php get_search_form(); ?></p>
-		
-					</div>
+    
+                    <p><?php get_search_form(); ?></p>
+        
+                </div>
 
                 <footer class="page--footer">
                 

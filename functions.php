@@ -470,4 +470,4 @@ function pagination($pages = '', $range = 4)
 
 	if(1 != $pages)
 	{
-		echo "<footer class=\"page-navigation\"><ul class=\"bones_page_navi\"><li><span>Page ".$paged." of ".$pages." </span></li
+		echo "<footer class=\"page-navigation\"><ul class=\"bones_page_navi\"><li><span>

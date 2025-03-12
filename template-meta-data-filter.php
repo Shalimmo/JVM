@@ -5,7 +5,7 @@
  */
 if(class_exists('MetaDataFilterPage')) {
     wp_enqueue_style('meta_data_filter_front', MetaDataFilterCore::get_application_uri() . 'css/front.css');
-    wp_enqueue_script('meta_data_filter_widget', MetaDataFilterCore::get_application_uri() . 'js/front.js', array('jquery'));
+    wp_enqueue_script('meta_data_filter_widget', MetaDataFilterCore::get_application_uri() . 'js/front.js', array('jquery'), null, true);
 }
 
 get_header();
@@ -16,7 +16,7 @@ get_header();
     <?php if(have_posts()) : while(have_posts()) : the_post(); ?>
             <?php
             the_content();
-            wp_reset_query();
+            wp_reset_postdata(); // Use wp_reset_postdata instead of wp_reset_query
         endwhile;
     endif;    
     ?>
@@ -25,5 +25,4 @@ get_header();
 
 <?php
 get_footer();
-
-
+?>

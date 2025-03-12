@@ -27,212 +27,202 @@ $choices = $field["choices"];
 $royal = get_field("royal");
 $first = get_field("first_gallery_photo");
 $second = get_field("second_gallery_photo");
+$calendar = get_field("calendar_availability");
 
 ?>
 
 <div class="slider__home">
-		<div class="header-img-container">	
-<?php if ( has_post_thumbnail() ) {
-$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'jmvillas-huge' );
-$image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'jmvillas-thumb' ); ?>
-<a href="<?php echo $first; ?>" data-fancybox="galleries">
-<img class="header-single" src="<?php echo $image[0]; ?>" srcset="<?php echo $image[0]; ?>, <?php echo $image_thumb[0]; ?> 376w" width="100%" />
-</a>
-<?php } else { ?>
-<img src="<?php bloginfo('stylesheet_directory'); ?>/images/img-journey-mexico-header.jpg" />
-<?php } ?>
-</div>		
-	</div>	
+    <div class="header-img-container">    
+        <?php if ( has_post_thumbnail() ) {
+        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'jmvillas-huge' );
+        $image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'jmvillas-thumb' ); ?>
+        <a href="<?php echo $first; ?>" data-fancybox="galleries">
+            <img class="header-single" src="<?php echo $image[0]; ?>" srcset="<?php echo $image[0]; ?>, <?php echo $image_thumb[0]; ?> 376w" width="100%" />
+        </a>
+        <?php } else { ?>
+        <img src="<?php bloginfo('stylesheet_directory'); ?>/images/img-journey-mexico-header.jpg" />
+        <?php } ?>
+    </div>        
+</div>    
+
 <!-- GET IMAGE FOR TOP OF PAGE -->
 
 <div id="content" class="clean">
-	<div style="max-width:1200px;margin:0 auto; display:block;padding-top:5px;">
-	<div class="view-gallery">
-<img src="https://villas.journeymexico.com/wp/wp-content/uploads/gallery-icon.png">
-<a href="<?php echo $second; ?>" data-fancybox="galleries" style="font-family:'Raleway';">
-<p><strong>VER GALERIA COMPLETA</strong></p></a>
+    <div style="max-width:1200px;margin:0 auto; display:block;padding-top:5px;">
+        <div class="view-gallery">
+            <img src="https://villas.journeymexico.com/wp/wp-content/uploads/gallery-icon.png">
+            <a href="<?php echo $second; ?>" data-fancybox="galleries" style="font-family:'Raleway';">
+                <p><strong>VER GALERIA COMPLETA</strong></p></a>
+        </div>
+        <div class="content--breadcrumb" style="display:inline-block;">
+            <?php the_breadcrumb(); ?>
+        </div>
+    </div>
 
-</div>
-	<div class="content--breadcrumb" style="display:inline-block;">
-		<?php the_breadcrumb(); ?>
-	</div>
-	</div>
+    <div id="inner-content" class="content--inner"  role="main">
 
-	<div id="inner-content" class="content--inner"  role="main">
+        <section class="content--villa">
 
-		<section class="content--villa">
+            <article class="villa">
 
-			<article class="villa">
+                <header class="villa--header wrap">
+                    <div class="villa--header--txt">
+                        <h1>
+                            <?php the_title(); ?>
+                        </h1>
+                        <?php 
+                        if ( $place )
+                        { ?>
+                            <h3><?php echo $place; ?></h3>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </header>
 
-				<header class="villa--header wrap">
-					<div class="villa--header--txt">
-						<h1>
-							<?php the_title(); ?>
-						</h1>
-						<?php 
-						if ( $place )
-						{ ?>
-							<h3><?php echo $place; ?></h3>
-						<?php
-						}
-						?>
-					</div>
-				</header>
+                <div class="villa--content wrap">
 
-				<div class="villa--content wrap">
+                    <div class="js-villa--content fix-m">
 
-					<div class="js-villa--content fix-m">
+                        <?php
+                        if ( $description_short )
+                        { ?>
+                            <div class="villa--subcontent">
+                                <div class="villa--capacity">
+                                    <p><?php echo $capacity; ?></p>
+                                    <p class="rr"><?php echo $price_range; ?></p>
+                                </div>
+                                <div class="villa--sharing">
+                                    <p class="rrr"><a href="#map-dest">VER EN EL MAPA</a></p>
+                                </div>
+                            </div>
 
-						<?php
-						if ( $description_short )
-						{ ?>
-							<div class="villa--subcontent">
-							<div class="villa--capacity">
-								<p><?php echo $capacity; ?></p>
-								<p class="rr"><?php echo $price_range; ?></p>
-							</div>
-							<div class="villa--sharing">
-								<p class="rrr"><a href="#map-dest">VER EN EL MAPA</a></p>
-							</div>
-							</div>
+                            <div class="villa--block fix-n">
 
-						<div class="villa--block fix-n">
+                                <?php the_content(); ?>
+                                <div style="max-width:600px;width:100%;display:flex;">
+                                    
+                                <?php if($value)
+                                {
+                                    foreach($value as $v)
+                                        {
+                                        echo ' <div style="width:50%;"><img src="https://villas.journeymexico.com/wp/wp-content/uploads/2016/06/' . $v . '">' . $choices[ $v ] .'</div>' ;
+                                        }
+                                }
+                                ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
 
-							<?php the_content(); ?>
-							<div style="max-width:600px;width:100%;display:flex;">
-								
-						<?php if($value)
-        {
-            foreach($value as $v)
+                        <div class="villa--planner fix-n">
+                            <div class="plan side" id="plan-your-trip">
+
+                                <header class="plan--header header-side">
+                                    <div class="wrap">
+                                        <h2>
+                                        PLANEA TU VIAJE
+                                        </h2>
+                                    </div>
+                                </header>
+
+                                <?php echo do_shortcode( '[contact-form-7 id="42547" title="Booking side_es"]' ); ?>
+                                <div class="form-footer">
+                                    <table>
+                                        <tr>
+                                            <td><img src="https://villas.journeymexico.com/wp/wp-content/uploads/2016/06/eagle.png"></td>
+                                            <td><p class="inquire">PARA RESERVACIONES<br>POR FAVOR MARCAR<br><strong>1-800-474-1629</strong></p></td>
+                                        </tr>    
+                                    </table>
+                                </div>
+                            </div>
+                        </div>    
+
+                    </div>
+
+                </div>
+
+                <?php
+                if ( $map_location)
                 {
-                echo ' <div style="width:50%;"><img src="https://villas.journeymexico.com/wp/wp-content/uploads/2016/06/' . $v . '">' . $choices[ $v ] .'</div>' ;
-                 }
-         }
-?>
-</div>
-						</div>
-						<?php
-						}
-						?>
-			
-						<div class="villa--planner fix-n">
-						<div class="plan side" id="plan-your-trip">
+                ?>
+                <div class="villa--related" id="map-dest">
+                            
+                    <header class="villa--related--header">
+                        <div class="wrap">
+                            <h2>UBICACIÓN DE <?php echo the_title(); ?></h2>
+                        </div>
+                    </header>
+                    <section class="villa--related--content wrap">
+                        <?php echo do_shortcode(''.$map_location.''); ?>
+                    </section>                    
+                </div>
+                <?php
+                }
+                ?>            
 
-					<header class="plan--header header-side">
-					<div class="wrap">
-						<h2>
-						PLANEA TU VIAJE
-						</h2>
-					</div>
-					</header>
+                <?php
+                if ( $posts )
+                { ?>
+                <div class="villa--related">
 
-					<?php echo do_shortcode( '[contact-form-7 id="42547" title="Booking side_es"]' ); ?>
-					<div class="form-footer">
-		<table>
-			<tr>
-				<td><img src="https://villas.journeymexico.com/wp/wp-content/uploads/2016/06/eagle.png"></td>
-				<td><p class="inquire">PARA RESERVACIONES<br>POR FAVOR MARCAR<br><strong>1-800-474-1629</strong></p></td>
-			</tr>	
-		</table>
-		</div>
-							</div>
-						</div>	
+                    <header class="villa--related--header">
+                        <div class="wrap">
+                            <h2>
+                                Tal ves te gusten:
+                            </h2>
+                        </div>
+                    </header>
 
-						
+                    <section class="villa--related--content wrap">
 
-					</div>
-					
+                        <div class="js-villa--related">
+                        <?php
+                        foreach( $posts as $post): ?>
+                        <?php setup_postdata($post);
 
-				</div>
-				
+                        $thumb_id = get_post_thumbnail_id($post->ID);
+                        $thumb_thumb_url_array = wp_get_attachment_image_src($thumb_id, 'jmvillas-thumb', true);
+                        
+                        $thumb_thumb_url = $thumb_thumb_url_array[0];
+                        ?>
 
-				
+                        <article class="villasArchive">
 
-				<?php
-						if ( $map_location)
-						{
-						?>
-				<div class="villa--related" id="map-dest">
-							
-					<header class="villa--related--header">
-						<div class="wrap">
-						<h2>UBICACIÓN DE <?php echo the_title(); ?></h2>
-						</div>
-					</header>
-					<section class="villa--related--content wrap">
-							<?php echo do_shortcode(''.$map_location.''); ?>
-					</section>					
-				</div>
-						<?php
-							}
-							?>
-						
+                            <figure role="group" aria-labelledby="caption" class="destinationsArchive--fig">
 
-				<?php
-				if ( $posts )
-				{ ?>
-				<div class="villa--related">
+                                <picture>
+                                    <source srcset="<?php echo $thumb_thumb_url; ?>" media="(max-width: 400px)">
+                                    <img srcset="<?php echo $thumb_thumb_url; ?>" alt="<?php the_title(); ?>">
+                                </picture>
 
-					<header class="villa--related--header">
-						<div class="wrap">
-							<h2>
-								Tal ves te gusten:
-							</h2>
-						</div>
-					</header>
+                            </figure>
+                                <div class="destinationsArchive--figcap">
 
-					<section class="villa--related--content wrap">
+                                    <h2 class="destinationsArchive--titulo">
+                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                    </h2>
 
-						<div class="js-villa--related">
-						<?php
-						foreach( $posts as $post): ?>
-						<?php setup_postdata($post);
+                                </div>
 
-						$thumb_id = get_post_thumbnail_id($post->ID);
-						$thumb_thumb_url_array = wp_get_attachment_image_src($thumb_id, 'jmvillas-thumb', true);
-						
-						$thumb_thumb_url = $thumb_thumb_url_array[0];
-						?>
+                        </article>
 
-						<article class="villasArchive">
+                        <?php endforeach; ?>
+                        <?php wp_reset_postdata(); ?>
+                        </div>
 
-							
+                    </section>
+                </div>
 
-								<figure role="group" aria-labelledby="caption" class="destinationsArchive--fig">
+                <?php
+                }
+                ?>
+            </article>
 
-									<picture>
-										<source srcset="<?php echo $thumb_thumb_url; ?>" media="(max-width: 400px)">
-										<img srcset="<?php echo $thumb_thumb_url; ?>" alt="<?php the_title(); ?>">
-									</picture>
-
-								</figure>
-									<div class="destinationsArchive--figcap">
-
-										<h2 class="destinationsArchive--titulo">
-											<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-										</h2>
-
-									</div>
-
-							
-
-						</article>
-
-						<?php endforeach; ?>
-						<?php wp_reset_postdata(); ?>
-						</div>
-
-					</section>
-				</div>
-
-				<?php
-				}
-				?>
-			</article>
-
-		</section> <!-- end .content--villa -->
-			  
-	</div> <!-- end #inner-content -->
+        </section> <!-- end .content--villa -->
+              
+    </div> <!-- end #inner-content -->
 </div> <!-- end #content -->
 <?php endwhile;
 endif; ?>

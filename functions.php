@@ -51,7 +51,7 @@ function modify_jquery() {
   if (!is_admin()) {
 	// comment out the next two lines to load the local copy of jQuery
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js', false, '1.8.1');
+	wp_register_script('jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', false, '3.6.0');
 	wp_enqueue_script('jquery');
 
 	wp_register_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js', false, '1.10.3');
@@ -59,6 +59,19 @@ function modify_jquery() {
   }
 }
 add_action('init', 'modify_jquery');
+
+// Enqueue custom scripts
+function custom_enqueue_scripts() {
+    // Enqueue jQuery Cycle
+    wp_enqueue_script('jquery-cycle', get_template_directory_uri() . '/scripts/jquery.cycle.js', array('jquery'), '2.9999.81', true);
+
+    // Enqueue jQuery RwdImageMaps
+    wp_enqueue_script('jquery-rwdimagemaps', get_template_directory_uri() . '/scripts/jquery.rwdImageMaps.js', array('jquery'), '1.6', true);
+
+    // Enqueue custom gallery script
+    wp_enqueue_script('gallery', get_template_directory_uri() . '/scripts/gallery.js', array('jquery', 'jquery-cycle'), null, true);
+}
+add_action('wp_enqueue_scripts', 'custom_enqueue_scripts');
 
 
 /************* THUMBNAIL SIZE OPTIONS *************/
@@ -138,8 +151,8 @@ register_sidebar(array(
 ));
 
 
-	
 
+	
 	/* 
 	to add more sidebars or widgetized areas, just copy
 	and edit the above sidebar code. In order to call 
@@ -326,13 +339,13 @@ function sharing( $atts ){
 	), $atts )
   );
 
-  $share_result =  '<div id="social-tt" class="social-button-wrapper"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="'.$url.'" data-via="journe[...]
+  $share_result =  '<div id="social-tt" class="social-button-wrapper"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="'.$url.'" data-via="journe[...
   // $share_result = '';
 
-  // $share_result = $share_result.'<div id="social-fb" class="fb-like social-button" data-href="'.$url.'" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></d[...]
-  $share_result = $share_result.'<div id="btn-fb" class="social-button-wrapper"><div id="social-fb" class="fb-like social-button" data-href="'.$url.'" data-colorscheme="light" data-layout="button[...]
+  // $share_result = $share_result.'<div id="social-fb" class="fb-like social-button" data-href="'.$url.'" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></d[...
+  $share_result = $share_result.'<div id="btn-fb" class="social-button-wrapper"><div id="social-fb" class="fb-like social-button" data-href="'.$url.'" data-colorscheme="light" data-layout="button[...
   $share_result = $share_result.'<div id="btn-fbshare" class="social-button-wrapper"><div class="fb-share-button" data-href="'.$url.'" data-width="65" data-type="button"></div></div>';
-  $share_result = $share_result.'<div id="btn-gplus" class="social-button-wrapper"><div id="social-google" class="social-button"><div class="g-plusone" data-size="medium" data-href="'.$url.'"></d[...]
+  $share_result = $share_result.'<div id="btn-gplus" class="social-button-wrapper"><div id="social-google" class="social-button"><div class="g-plusone" data-size="medium" data-href="'.$url.'"></d[...
   return $share_result;
 }
 add_shortcode('jmex_social_share','sharing');
@@ -445,29 +458,3 @@ function get_custom_post_type_template($single_template) {
 
      if ( is_single( array('42474','42553','42569')) ) {
           $single_template = get_stylesheet_directory() . '/single-villas-es.php';
-     }
-     return $single_template;
-}
-add_filter( 'single_template', 'get_custom_post_type_template' );
-
-// Paginación
-function pagination($pages = '', $range = 4)
-{
-	$showitems = ($range * 2)+1;  
-
-	global $paged;
-	if(empty($paged)) $paged = 1;
-
-	if($pages == '')
-	{
-		global $wp_query;
-		$pages = $wp_query->max_num_pages;
-		if(!$pages)
-		{
-			$pages = 1;
-		}
-	}
-
-	if(1 != $pages)
-	{
-		echo "<footer class=\"page-navigation\"><ul class=\"bones_page_navi\"><li><span>

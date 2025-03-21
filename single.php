@@ -39,10 +39,10 @@ $amenities_icons = get_field("amenities_icons");
             ?>
 
             <figure>
-                <a <?php echo $fondo = ( $horiz_media != "" ) ? "style='background-image: url(" . $full . ");'" : "" ; ?> href="<?php echo $full; ?>" target="_blank" class="js-strip " data-strip-group="villa">
+                <a <?php echo $fondo = ( $horiz_media != "" ) ? "style='background-image: url(" . esc_url($full) . ");'" : "" ; ?> href="<?php echo esc_url($full); ?>" target="_blank" class="js-strip " data-strip-group="gallery" data-strip-options="side: 'top'">
                     <picture>
-                        <source srcset="<?php echo $medium; ?>" media="(max-width: 400px)">
-                        <img srcset="<?php echo $full; ?>" src="<?php echo $full; ?>" alt="<?php the_title(); ?>" class="<?php echo $horiz_media; ?>">
+                        <source srcset="<?php echo esc_url($medium); ?>" media="(max-width: 400px)">
+                        <img srcset="<?php echo esc_url($full); ?>" src="<?php echo esc_url($full); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="<?php echo esc_attr($horiz_media); ?>">
                     </picture>
                 </a>
             </figure>
@@ -95,7 +95,7 @@ $amenities_icons = get_field("amenities_icons");
                         <?php 
                         if ( $place )
                         { ?>
-                            <h3><?php echo $place; ?></h3>
+                            <h3><?php echo esc_html($place); ?></h3>
                         <?php
                         }
                         ?>
@@ -111,8 +111,8 @@ $amenities_icons = get_field("amenities_icons");
                         { ?>
                             <div class="villa--subcontent">
                             <div class="villa--capacity">
-                                <p><?php echo $capacity; ?></p>
-                                <p class="rr"><?php echo $price_range; ?></p>
+                                <p><?php echo esc_html($capacity); ?></p>
+                                <p class="rr"><?php echo esc_html($price_range); ?></p>
                             </div>
                             <div class="villa--sharing">
                                 <p>SHARE THIS VILLA</p>
@@ -130,11 +130,11 @@ $amenities_icons = get_field("amenities_icons");
                             ?>
                             <div class="villa--descripcion__full js-villa--descripcion__full">
                                 <?php
-                                    echo $description_full;
+                                    echo wp_kses_post($description_full);
 
-                                    if(in_array("Pool", $amenities_icons )){
+                                    if (in_array("Pool", $amenities_icons)){
                                 ?>
-                                <div class="amenities"><img src="<?php echo get_bloginfo('url'); ?>/wp/wp-content/uploads/2015/07/view-map-pointer.png" ></div>
+                                <div class="amenities"><img src="<?php echo esc_url(get_bloginfo('url')); ?>/wp/wp-content/uploads/2015/07/view-map-pointer.png" ></div>
                                 <?php
                                     }
                                 ?>
@@ -161,7 +161,6 @@ $amenities_icons = get_field("amenities_icons");
                     <h2>CUSTOMIZE YOUR VILLA HOLIDAY</h2>
                     <p>Let us help you create a complete vacation experience by adding unique experiences to your stay</p>
                     <?php echo do_shortcode('[new_royalslider id="3"]')?>
-
                 </div>
 
                 <?php
@@ -176,7 +175,7 @@ $amenities_icons = get_field("amenities_icons");
                         </div>
                     </header>
                     <section class="villa--related--content wrap">
-                            <?php echo $map_location; ?>
+                            <?php echo wp_kses_post($map_location); ?>
                     </section>                    
                 </div>
                 <?php
@@ -214,8 +213,8 @@ $amenities_icons = get_field("amenities_icons");
                             <figure role="group" aria-labelledby="caption" class="destinationsArchive--fig">
 
                                 <picture>
-                                    <source srcset="<?php echo $thumb_thumb_url; ?>" media="(max-width: 400px)">
-                                    <img srcset="<?php echo $thumb_thumb_url; ?>" alt="<?php the_title(); ?>">
+                                    <source srcset="<?php echo esc_url($thumb_thumb_url); ?>" media="(max-width: 400px)">
+                                    <img srcset="<?php echo esc_url($thumb_thumb_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
                                 </picture>
 
                             </figure>

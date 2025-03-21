@@ -9,8 +9,8 @@ $thumb_medium_url = $default_header['sizes']['jmvillas-full'];
 <header class="content--header">
     <figure>
         <picture>
-            <source srcset="<?php echo $thumb_thumb_url; ?>" media="(max-width: 400px)">
-            <img srcset="<?php echo $thumb_medium_url; ?>" alt="<?php the_title(); ?>">
+            <source srcset="<?php echo esc_url($thumb_thumb_url); ?>" media="(max-width: 400px)">
+            <img srcset="<?php echo esc_url($thumb_medium_url); ?>" alt="<?php the_title_attribute(); ?>">
         </picture>
     </figure>
 </header>
